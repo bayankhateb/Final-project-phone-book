@@ -1,0 +1,182 @@
+body {
+  margin: 0; /* Remove default margin */
+  font-family: Arial, sans-serif; /* Set font */
+  min-height: 100vh; /* Full viewport height */
+  background: linear-gradient(#7d999e, rgb(200, 222, 235), rgb(226, 242, 248)); /* Vertical gradient background */
+  display: flex; /* Enable Flexbox layout */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center items horizontally */
+  padding: 60px 20px; /* Padding around body content */
+}
+
+.container {
+  background: white; /* White background for main box */
+  padding: 20px; /* Inner spacing */
+  border-radius: 12px; /* Rounded corners */
+  max-width: 600px; /* Maximum width */
+  width: 100%; /* Responsive to parent */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for elevation */
+}
+
+h1 {
+  text-align: center; /* Center the title */
+  color: #003366; /* Dark blue color */
+  font-size: 2rem; /* Large text size */
+  margin-bottom: 20px; /* Space below title */
+}
+
+.top-bar {
+  display: flex; /* Arrange items in a row */
+  justify-content: space-between; /* Space between items */
+  align-items: center; /* Vertically align items */
+  gap: 10px; /* Gap between items */
+  margin-bottom: 20px; /* Space below bar */
+  flex-wrap: wrap; /* Wrap items on small screens */
+}
+
+.contact-count {
+  font-size: 16px; /* Text size */
+  font-weight: bold; /* Bold text */
+  color: #003366; /* Same dark blue */
+}
+
+.search-box input {
+  padding: 8px; /* Inner spacing */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  width: 150px; /* Fixed width */
+  transition: border-color 0.3s; /* Smooth transition on focus */
+}
+
+.search-actions {
+  display: flex; /* Arrange icons next to search */
+  align-items: center; /* Center vertically */
+  gap: 10px; /* Gap between search and icons */
+}
+
+.icons {
+  display: flex; /* Align icons in a row */
+  gap: 5px; /* Small gap between icons */
+}
+
+.icons button {
+  background: none; /* No background */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 20px; /* Emoji size */
+  transition: transform 0.2s ease; /* Scale on hover */
+}
+
+.icons button:hover {
+  transform: scale(1.2); /* Slight zoom on hover */
+}
+
+.contact {
+  display: flex; /* Arrange contact details and buttons in a row */
+  align-items: center; /* Center vertically */
+  justify-content: space-between; /* Space between left and right */
+  border-bottom: 1px solid #eee; /* Light bottom border */
+  padding: 10px 0; /* Vertical padding */
+}
+
+.contact-info {
+  display: flex; /* Arrange image and name in a row */
+  align-items: center; /* Center vertically */
+  flex: 1; /* Take all available space */
+}
+
+.contact img {
+  width: 60px; /* Image size */
+  height: 60px;
+  border-radius: 50%; /* Make image circular */
+  margin-right: 15px; /* Space between image and name */
+}
+
+.contact-actions button {
+  background: none; /* No background */
+  border: none; /* No border */
+  cursor: pointer; /* Pointer on hover */
+  margin-left: 8px; /* Space between buttons */
+  font-size: 16px; /* Button size */
+}
+
+footer {
+  width: 100%; /* Full width */
+  text-align: center; /* Center text */
+  margin-top: 40px; /* Space above */
+  padding: 20px 0; /* Vertical padding */
+  color: #397782; /* Blue-green color */
+  font-size: 1rem; /* Normal font size */
+}
+
+.modal {
+  display: flex; /* Center modal content */
+  justify-content: center;
+  align-items: center;
+  position: fixed; /* Overlay entire screen */
+  inset: 0; /* Top, right, bottom, left = 0 */
+  background-color: rgba(0, 0, 0, 0.5); /* Dark transparent background */
+  z-index: 999; /* On top of everything */
+}
+
+.modal.hidden {
+  display: none; /* Hide modal */
+}
+
+.modal-content {
+  background: #fff; /* White box */
+  padding: 2rem; /* Inner spacing */
+  border-radius: 4px; /* Rounded corners */
+  width: 400px; /* Fixed width */
+  max-width: 90%; /* Responsive on small screens */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Shadow */
+  position: relative; /* For close button positioning */
+}
+
+.close {
+  position: absolute; /* Place on top corner */
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem; /* Large X */
+  cursor: pointer; /* Pointer on hover */
+}
+
+form {
+  display: flex;
+  flex-direction: column; /* Stack fields vertically */
+  gap: 10px; /* Space between inputs */
+}
+
+label {
+  font-weight: bold; /* Make labels stand out */
+}
+
+input[type="text"] {
+  padding: 8px; /* Inner spacing */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+}
+
+button[type="submit"] {
+  background-color: #183d5d; /* Dark blue background */
+  color: white; /* White text */
+  border: none; /* No border */
+  padding: 10px 15px; /* Button size */
+  font-size: 1rem; /* Text size */
+  border-radius: 4px; /* Rounded edges */
+  cursor: pointer; /* Pointer on hover */
+  margin-top: 10px; /* Space above */
+}
+
+button[type="submit"]:hover {
+  background-color: #1c4a73; /* Slightly lighter blue on hover */
+}
+
+#infoContent h2 {
+  margin-top: 0; /* Remove top margin */
+  color: #003366; /* Title color inside info modal */
+}
+
+#infoContent p {
+  margin: 8px 0; /* Space between paragraphs */
+}

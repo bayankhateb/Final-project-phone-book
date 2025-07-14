@@ -1,0 +1,97 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head>
+  <meta charset="UTF-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+  <link rel="stylesheet" href="style.css" /> 
+  <title>Phone Book</title> 
+</head>
+<body>
+
+  <div class="container"> <!-- Main content container -->
+    <h1>Phone Book</h1> <!-- Page heading -->
+
+    <div class="top-bar"> <!-- Top section for search and controls -->
+
+      <div id="contactCount" class="contact-count">0 contacts</div> <!-- Displays the number of contacts -->
+
+      <div class="search-actions"> <!-- Grouping for search input and buttons -->
+        <div class="search-box">
+          <input type="text" placeholder="Search..." id="search" /> <!-- Search input field -->
+        </div>
+        <div class="icons"> <!-- Icons for actions -->
+          <button title="Add User">👤</button> <!-- Button to open the "Add Contact" modal -->
+          <button title="Delete All">🗑️</button> <!-- Button to delete all contacts -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Template Contact Card (used for cloning in JavaScript) -->
+    <div class="contact template" style="display: none;"> <!-- Hidden template card -->
+      <div class="contact-info">
+        <img src="" alt="" /> <!-- Contact's image -->
+        <span></span> <!-- Contact's name -->
+      </div>
+      <div class="contact-actions"> <!-- Action buttons for each contact -->
+        <button title="Info">ℹ️</button> <!-- Show contact details -->
+        <button title="Edit">✏️</button> <!-- Edit contact -->
+        <button title="Delete">🗑️</button> <!-- Delete contact -->
+      </div>
+    </div>
+
+    <!-- Modal for Adding/Editing Contacts -->
+    <div class="modal hidden" id="editModal"> <!-- Hidden modal for adding/editing contact -->
+      <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span> <!-- Close button -->
+        <form> <!-- Contact form -->
+          <div class="form-group">
+            <label>Name *:</label>
+            <input type="text" /> <!-- Name field (required) -->
+          </div>
+          <div class="form-group">
+            <label>Phone *:</label>
+            <input type="text" /> <!-- Phone number (required) -->
+          </div>
+          <div class="form-group">
+            <label>Address:</label>
+            <input type="text" /> <!-- Optional address field -->
+          </div>
+          <div class="form-group">
+            <label>Age:</label>
+            <input type="text" /> <!-- Optional age field -->
+          </div>
+          <div class="form-group">
+            <label>Email:</label>
+            <input type="text" /> <!-- Optional email field -->
+          </div>
+          <div class="form-group">
+            <label>Image URL:</label>
+            <input type="text" /> <!-- Optional image URL -->
+          </div>
+          <button id="submit" type="submit">Save</button> <!-- Submit/save button -->
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal for Contact Info -->
+    <div class="modal hidden" id="infoModal"> <!-- Hidden modal for showing contact info -->
+      <div class="modal-content">
+        <span class="close" id="closeInfoModal">&times;</span> <!-- Close button -->
+        <div id="infoContent">
+          <!-- Contact details will be inserted here dynamically by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer> <!-- Page footer -->
+    <p>&copy; 2023 Phone Book. All rights reserved.<br/>
+    For any help call us<br/>
+    Ameer Hariri 0556645417<br/>
+    Bayan Khateb 0559180977</p>
+  </footer>
+
+  <script src="scripts.js"></script> 
+
+</body>
+</html>
