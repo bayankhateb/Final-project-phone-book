@@ -106,11 +106,15 @@ function renderContacts(list) {
       editModal.classList.remove("hidden");
     };
 
-    // Set up Delete button - removes contact from list
-    card.querySelector('[title="Delete"]').onclick = () => {
-      contacts.splice(index, 1); // Remove from array
-      renderContacts(contacts); // Refresh the list
-    };
+    // alert massege before delet
+card.querySelector('[title="Delete"]').onclick = () => {
+  const confirmDelete = confirm(`Are you sure you want to delete "${contact.name}"?`);
+  if (confirmDelete) {
+    contacts.splice(index, 1); // Remove from array
+    renderContacts(contacts); // Refresh the list
+  }
+};
+
 
     container.appendChild(card); // Add card to the page
   });
