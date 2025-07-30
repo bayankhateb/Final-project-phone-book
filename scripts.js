@@ -60,6 +60,8 @@ function updateContactCount(count) {
 
 // Renders the list of contacts on the page
 function renderContacts(list) {
+list.sort((a, b) => a.name.localeCompare(b.name)); // Always sort alphabetically
+
   // Remove all existing contact cards (except the hidden template)
   document.querySelectorAll(".contact:not(.template)").forEach(c => c.remove());
 
@@ -171,6 +173,12 @@ form.addEventListener("submit", (e) => {
   } else {
     contacts.push(newContact);
   }
+
+  // Always sort alphabetically after adding/editing
+contacts.sort((a, b) => a.name.localeCompare(b.name));
+
+editModal.classList.add("hidden"); // Close modal
+renderContacts(contacts); // Refresh contact list
 
   editModal.classList.add("hidden"); // Close modal
   renderContacts(contacts); // Refresh contact list
