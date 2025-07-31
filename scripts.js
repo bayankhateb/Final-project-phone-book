@@ -155,7 +155,19 @@ closeModal.addEventListener("click", () => {
 form.addEventListener("submit", (e) => {
   e.preventDefault(); // Prevent default form behavior
 
-  const inputs = form.querySelectorAll("input"); // Grab all input fields
+const inputs = form.querySelectorAll("input"); // Grab all input fields
+  const phone = inputs[1].value.trim();
+
+  // Phone validation rules
+  const isValid =
+    phone.startsWith("05") &&
+    /^\d+$/.test(phone) &&
+    phone.length === 10;
+
+  if (!isValid) {
+    alert("Invalid phone number!\n\nMake sure it:\n1. Starts with '05'\n2. Contains only digits\n3. Is exactly 10 digits long");
+    return; // Stop form submission
+  }
 
   // Create new contact object from input values
   const newContact = {
@@ -179,7 +191,6 @@ contacts.sort((a, b) => a.name.localeCompare(b.name));
 
 editModal.classList.add("hidden"); // Close modal
 renderContacts(contacts); // Refresh contact list
-
   editModal.classList.add("hidden"); // Close modal
   renderContacts(contacts); // Refresh contact list
 });
