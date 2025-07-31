@@ -169,6 +169,16 @@ const inputs = form.querySelectorAll("input"); // Grab all input fields
     return; // Stop form submission
   }
 
+// Check for duplicate name or phone
+  const isDuplicate = contacts.some((c, idx) => {
+   if (editingIndex !== null && idx === editingIndex) return false; // Skip if editing the same contact
+    return c.name.toLowerCase() === name || c.phone === phone;
+  });
+
+  if (isDuplicate) {
+    alert("A contact with the same phone number already exists.");
+    return;
+  }
   // Create new contact object from input values
   const newContact = {
     name: inputs[0].value,
