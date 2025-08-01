@@ -7,6 +7,7 @@ body {
   flex-direction: column; /* Stack children vertically */
   align-items: center; /* Center items horizontally */
   padding: 60px 20px; /* Padding around body content */
+   
 }
 
 .container {
@@ -179,4 +180,52 @@ button[type="submit"]:hover {
 
 #infoContent p {
   margin: 8px 0; /* Space between paragraphs */
+}
+
+
+
+@media (max-width: 600px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .search-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .icons {
+    justify-content: space-between;
+  }
+
+  .contact {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact img {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 1rem;
+  }
+
+  footer {
+    font-size: 0.9rem;
+  }
 }

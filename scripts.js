@@ -1,38 +1,47 @@
-'use strict'; 
+'use strict';
 
 // Array of contact objects with default sample data
 let contacts = [
   {
-    name: "dror",
-    phone: "423443243",
-    address: "tel-aviv",
-    age: "19",
-    email: "dror20@gmail.com",
-    src: "https://play-lh.googleusercontent.com/vco-LT_M58j9DIAxlS1Cv9uvzbRhB6cYIZJS7ocZksWRqoEPat_QXb6fVFi77lciJZQ=w526-h296-rw"
+    name: "Nizar",
+    phone: "0526579472",
+    address: "Tarshisha",
+    age: "29",
+    email: "Jarayse@gmail.com ",
+    src: "https://th.bing.com/th/id/R.a55cd118104835f519252c805978005c?rik=TD%2fR8AU%2b%2bIsXnw&riu=http%3a%2f%2fb-gay.com%2fwp-content%2fuploads%2f2023%2f11%2fBarcelona-e1700382007980.jpg&ehk=VveFepU2X%2fhUOTLsJwlO8vS0JaJ8OYHUIGsY%2fhOyplU%3d&risl=&pid=ImgRaw&r=0"
   },
   {
-    name: "lior",
+    name: "Ayman",
     phone: "4334642312",
     address: "tel-aviv",
-    age: "20",
+    age: "23",
     email: "lior19@gmail.com",
-    src: "./img/arick.jpeg"
+    src: "https://th.bing.com/th/id/R.a55cd118104835f519252c805978005c?rik=TD%2fR8AU%2b%2bIsXnw&riu=http%3a%2f%2fb-gay.com%2fwp-content%2fuploads%2f2023%2f11%2fBarcelona-e1700382007980.jpg&ehk=VveFepU2X%2fhUOTLsJwlO8vS0JaJ8OYHUIGsY%2fhOyplU%3d&risl=&pid=ImgRaw&r=0"
   },
   {
     name: "bayan",
     phone: "0559180977",
     address: "tamra",
-    age: "40",
+    age: "20",
     email: "khatebbayan19@gmail.com",
-    src: "/img/tawfek.jpeg"
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNJOIaX4UkB2GkuCwkv5vonlutIOPnU7jiIw&s"
   },
   {
     name: "amer",
     phone: "0556645417",
     address: "Nazareth",
-    age: "35",
+    age: "20",
     email: "amer19@gmail.com",
-    src: "/img/tomas.jpeg"
+    src: "https://th.bing.com/th/id/R.38c305eaaf3f04d6296f0dc68eaa33e4?rik=eQ20dRW4CFtEYg&pid=ImgRaw&r=0"
+  },
+
+  {
+    name: "ahmed",
+    phone: "0549535907",
+    address: "Illut",
+    age: "20",
+    email: "ahmed20@gmail.com",
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-cZexbbzCkxrHMMM0pz0IOu6vHezO3_n8sQ&s"
   }
 ];
 
@@ -60,7 +69,7 @@ function updateContactCount(count) {
 
 // Renders the list of contacts on the page
 function renderContacts(list) {
-list.sort((a, b) => a.name.localeCompare(b.name)); // Always sort alphabetically
+  list.sort((a, b) => a.name.localeCompare(b.name)); // Always sort alphabetically
 
   // Remove all existing contact cards (except the hidden template)
   document.querySelectorAll(".contact:not(.template)").forEach(c => c.remove());
@@ -109,13 +118,13 @@ list.sort((a, b) => a.name.localeCompare(b.name)); // Always sort alphabetically
     };
 
     // alert massege before delet
-card.querySelector('[title="Delete"]').onclick = () => {
-  const confirmDelete = confirm(`Are you sure you want to delete "${contact.name}"?`);
-  if (confirmDelete) {
-    contacts.splice(index, 1); // Remove from array
-    renderContacts(contacts); // Refresh the list
-  }
-};
+    card.querySelector('[title="Delete"]').onclick = () => {
+      const confirmDelete = confirm(`Are you sure you want to delete "${contact.name}"?`);
+      if (confirmDelete) {
+        contacts.splice(index, 1); // Remove from array
+        renderContacts(contacts); // Refresh the list
+      }
+    };
 
 
     container.appendChild(card); // Add card to the page
@@ -155,7 +164,7 @@ closeModal.addEventListener("click", () => {
 form.addEventListener("submit", (e) => {
   e.preventDefault(); // Prevent default form behavior
 
-const inputs = form.querySelectorAll("input"); // Grab all input fields
+  const inputs = form.querySelectorAll("input"); // Grab all input fields
   const phone = inputs[1].value.trim();
 
   // Phone validation rules
@@ -169,10 +178,10 @@ const inputs = form.querySelectorAll("input"); // Grab all input fields
     return; // Stop form submission
   }
 
-// Check for duplicate name or phone
-  const isDuplicate = contacts.some((c, idx) => {
-   if (editingIndex !== null && idx === editingIndex) return false; // Skip if editing the same contact
-    return c.name.toLowerCase() === name || c.phone === phone;
+  // Check for duplicate  phone number
+  const isDuplicate = contacts.some((c) => {
+    if (editingIndex !== null) return false; // Skip if editing the same contact
+    return c.phone === phone;
   });
 
   if (isDuplicate) {
@@ -197,10 +206,10 @@ const inputs = form.querySelectorAll("input"); // Grab all input fields
   }
 
   // Always sort alphabetically after adding/editing
-contacts.sort((a, b) => a.name.localeCompare(b.name));
+  contacts.sort((a, b) => a.name.localeCompare(b.name));
 
-editModal.classList.add("hidden"); // Close modal
-renderContacts(contacts); // Refresh contact list
+  editModal.classList.add("hidden"); // Close modal
+  renderContacts(contacts); // Refresh contact list
   editModal.classList.add("hidden"); // Close modal
   renderContacts(contacts); // Refresh contact list
 });
