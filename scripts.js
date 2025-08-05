@@ -1,22 +1,27 @@
 'use strict';
 
-// Array of contact objects with default sample data
+// Default  contacts
 let contacts = [
   {
     name: "Nizar",
     phone: "0526579472",
     address: "Tarshisha",
     age: "29",
-    email: "Jarayse@gmail.com ",
-    src: "https://th.bing.com/th/id/R.a55cd118104835f519252c805978005c?rik=TD%2fR8AU%2b%2bIsXnw&riu=http%3a%2f%2fb-gay.com%2fwp-content%2fuploads%2f2023%2f11%2fBarcelona-e1700382007980.jpg&ehk=VveFepU2X%2fhUOTLsJwlO8vS0JaJ8OYHUIGsY%2fhOyplU%3d&risl=&pid=ImgRaw&r=0"
+    email: "Jarayse@gmail.com",
+    src: "./img/nizar.jpg",
+     note: "Friend from university",
+     favorite:false
+
   },
   {
     name: "Ayman",
-    phone: "4334642312",
+    phone: "0534642312",
     address: "tel-aviv",
     age: "23",
     email: "lior19@gmail.com",
-    src: "https://th.bing.com/th/id/R.a55cd118104835f519252c805978005c?rik=TD%2fR8AU%2b%2bIsXnw&riu=http%3a%2f%2fb-gay.com%2fwp-content%2fuploads%2f2023%2f11%2fBarcelona-e1700382007980.jpg&ehk=VveFepU2X%2fhUOTLsJwlO8vS0JaJ8OYHUIGsY%2fhOyplU%3d&risl=&pid=ImgRaw&r=0"
+    src: "./img/ayman.jpg",
+     note: "Work colleague",
+     favorite:false
   },
   {
     name: "bayan",
@@ -24,7 +29,9 @@ let contacts = [
     address: "tamra",
     age: "20",
     email: "khatebbayan19@gmail.com",
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNJOIaX4UkB2GkuCwkv5vonlutIOPnU7jiIw&s"
+    src: "./img/bayan.jpg",
+    note: "Bike team leader",
+     favorite:false
   },
   {
     name: "amer",
@@ -32,65 +39,93 @@ let contacts = [
     address: "Nazareth",
     age: "20",
     email: "amer19@gmail.com",
-    src: "https://th.bing.com/th/id/R.38c305eaaf3f04d6296f0dc68eaa33e4?rik=eQ20dRW4CFtEYg&pid=ImgRaw&r=0"
+    src: "./img/amer.jpg",
+    note: "chef",
+    favorite: false
   },
-
   {
     name: "ahmed",
     phone: "0549535907",
     address: "Illut",
     age: "20",
     email: "ahmed20@gmail.com",
-    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-cZexbbzCkxrHMMM0pz0IOu6vHezO3_n8sQ&s"
+    src: "./img/ahmed.jpg",
+    note:"high school friend",
+    favorite:true
   }
 ];
 
-// Grabbing references to important DOM elements
-const container = document.querySelector(".container"); // Main container
-const contactTemplate = document.querySelector(".contact.template"); // Template for cloning contact cards
-const searchInput = document.getElementById("search"); // Search input field
-const editModal = document.getElementById("editModal"); // Modal for adding/editing
-const closeModal = document.getElementById("closeModal"); // Close button for edit modal
-const infoModal = document.getElementById("infoModal"); // Info modal for contact details
-const infoContent = document.getElementById("infoContent"); // Where the info content is inserted
-const closeInfoModal = document.getElementById("closeInfoModal"); // Close button for info modal
-const addUserBtn = document.querySelector('button[title="Add User"]'); // Add User button
-const deleteAllBtn = document.querySelector('button[title="Delete All"]'); // Delete All button
-const form = editModal.querySelector("form"); // The form inside the modal
-const submitBtn = document.getElementById("submit"); // Save button
+// DOM elements
+const favoritesBtn = document.getElementById("showFavoritesBtn");
+const container = document.querySelector(".container");
+const contactTemplate = document.querySelector(".contact.template");
+const searchInput = document.getElementById("search");
+const editModal = document.getElementById("editModal");
+const closeModal = document.getElementById("closeModal");
+const infoModal = document.getElementById("infoModal");
+const infoContent = document.getElementById("infoContent");
+const closeInfoModal = document.getElementById("closeInfoModal");
+const addUserBtn = document.querySelector('button[title="Add User"]');
+const deleteAllBtn = document.querySelector('button[title="Delete All"]');
+const form = editModal.querySelector("form");
 
-let editingIndex = null; // Tracks which contact is being edited (null means new contact)
+let editingIndex = null;
 
-// Updates the number of contacts displayed on screen
-function updateContactCount(count) {
-  const countElement = document.getElementById("contactCount");
-  countElement.textContent = `${count} contact${count === 1 ? '' : 's'}`;
-}
-
-// Renders the list of contacts on the page
+//the main function for the contacts list
 function renderContacts(list) {
-  list.sort((a, b) => a.name.localeCompare(b.name)); // Always sort alphabetically
+// sort according the favorite
+  list.sort((a, b) => {
+    if (a.favorite === b.favorite) {
+      return a.name.localeCompare(b.name);
+    }
+    return b.favorite - a.favorite;
+  });
 
-  // Remove all existing contact cards (except the hidden template)
-  document.querySelectorAll(".contact:not(.template)").forEach(c => c.remove());
-
-  // Loop through each contact and create a card
+ 
+ document.querySelectorAll(".contact:not(.template)").forEach(c => c.remove());
+ // the resbonsible function for each contact that exist in the list or will add by the user 
   list.forEach((contact, index) => {
-    const card = contactTemplate.cloneNode(true); // Clone the template
+    const card = contactTemplate.cloneNode(true);
     card.classList.remove("template");
-    card.style.display = "flex"; // Show the card
+    card.style.display = "flex";
 
-    // Set the contact image or fallback
+    // function that resbonsible to add the contact to the favorite list 
+    if (contact.favorite) {
+      card.classList.add("favorite");
+    }
+
+    // image settongs 
     const img = card.querySelector("img");
     img.src = contact.src && contact.src.trim() !== "" ? contact.src : "img/d3b1c094-7d0d-4665-997c-83206e76f1a3.png";
     img.alt = contact.name;
-    img.onerror = () => { // Fallback image if loading fails
+    img.onerror = () => {
       img.src = "img/d3b1c094-7d0d-4665-997c-83206e76f1a3.png";
     };
 
-    card.querySelector("span").textContent = contact.name; // Set name on card
+    // outputs in the contact card
+  const namePhoneSpan = card.querySelector("span");
+    namePhoneSpan.textContent = ""; // clear it befor add new name
+  const nameLine = document.createElement("strong");
+    nameLine.textContent = contact.name;
+  const phoneLine = document.createElement("small");
+    phoneLine.textContent = contact.phone;
+      namePhoneSpan.appendChild(nameLine);
+      namePhoneSpan.appendChild(document.createElement("br")); // line down
+      namePhoneSpan.appendChild(phoneLine);
 
-    // Set up Info button - shows contact info in modal
+
+
+    // ⭐ Favorite button
+    const favBtn = document.createElement("button");
+    favBtn.innerHTML = contact.favorite ? "⭐" : "☆";
+    favBtn.title = contact.favorite ? "Unfavorite" : "Mark as Favorite";
+    favBtn.onclick = () => {
+      contact.favorite = !contact.favorite;
+      renderContacts(contacts);
+    };
+    card.querySelector(".contact-actions").prepend(favBtn);
+
+    // function for the info settings
     card.querySelector('[title="Info"]').onclick = () => {
       infoContent.innerHTML = `
         <h2>Contact Info</h2>
@@ -99,125 +134,170 @@ function renderContacts(list) {
         <p><strong>Address:</strong> ${contact.address}</p>
         <p><strong>Age:</strong> ${contact.age || 'N/A'}</p>
         <p><strong>Email:</strong> ${contact.email}</p>
+        <p><strong>Note:</strong> ${contact.note || 'N/A'}</p>
       `;
       infoModal.classList.remove("hidden");
     };
+    // function for edit settings
+   card.querySelector('[title="Edit"]').onclick = () => {
+    editingIndex = index;
+  
+    // Get all inputs and the textarea from the form
+  const inputFields = form.querySelectorAll("input");
+  const noteField = form.querySelector("textarea");
 
-    // Set up Edit button - pre-fill form and open modal
-    card.querySelector('[title="Edit"]').onclick = () => {
-      editingIndex = index;
-      const inputs = form.querySelectorAll("input");
-      inputs[0].value = contact.name;
-      inputs[1].value = contact.phone;
-      inputs[2].value = contact.address;
-      inputs[3].value = contact.age || '';
-      inputs[4].value = contact.email || '';
-      inputs[5].value = contact.src;
-
-      editModal.classList.remove("hidden");
-    };
-
-    // alert massege before delet
+  // Fill each input from the selected contact   
+  inputFields[0].value = contact.name;
+  inputFields[1].value = contact.phone;
+  inputFields[2].value = contact.address;
+  inputFields[3].value = contact.age || '';
+  inputFields[4].value = contact.email || '';
+  inputFields[5].value = contact.src || '';
+ noteField.value = contact.note ||'';
+  
+  // Open the modal
+  editModal.classList.remove("hidden");
+};
+  // function of the delete button 
     card.querySelector('[title="Delete"]').onclick = () => {
       const confirmDelete = confirm(`Are you sure you want to delete "${contact.name}"?`);
       if (confirmDelete) {
-        contacts.splice(index, 1); // Remove from array
-        renderContacts(contacts); // Refresh the list
+        contacts.splice(index, 1);
+        renderContacts(contacts);
       }
     };
 
-
-    container.appendChild(card); // Add card to the page
+    container.appendChild(card);
   });
 
-  updateContactCount(list.length); // Update count display
+  updateContactCount(list.length);
 }
 
-// Filter contacts as user types in the search field
+// function for the counter
+function updateContactCount(count) {
+  document.getElementById("contactCount").textContent =
+    `${count} contact${count === 1 ? '' : 's'}`;
+}
+
+
+// Search functionality
 searchInput.addEventListener("input", () => {
-  const val = searchInput.value.toLowerCase(); // Get lowercase search term
-  const filtered = contacts.filter(c => c.name.toLowerCase().includes(val)); // Filter by name
-  renderContacts(filtered); // Show filtered list
+  const val = searchInput.value.toLowerCase();
+  const filtered = contacts.filter(c => c.name.toLowerCase().includes(val));
+  renderContacts(filtered);
 });
 
-// Add User button click - shows empty form for new contact
+// Add user
 addUserBtn.addEventListener("click", () => {
-  editingIndex = null; // No existing contact is being edited
-  form.reset(); // Clear form fields
-  editModal.classList.remove("hidden"); // Show modal
+  editingIndex = null;
+  form.reset();
+  editModal.classList.remove("hidden");
 });
 
-// Delete All button click - confirms and clears contacts
+// Delete all
 deleteAllBtn.addEventListener("click", () => {
   if (confirm("Delete all contacts?")) {
-    contacts = []; // Clear array
-    renderContacts(contacts); // Refresh UI
+    contacts = [];
+    renderContacts(contacts);
   }
 });
 
-// Close the edit modal (× button)
+// Close button of the edit modal
 closeModal.addEventListener("click", () => {
   editModal.classList.add("hidden");
 });
 
-// Handle form submission for adding or updating contact
-form.addEventListener("submit", (e) => {
-  e.preventDefault(); // Prevent default form behavior
+// Close button of the info modal
+closeInfoModal.addEventListener("click", () => {
+  infoModal.classList.add("hidden");
+});
 
-  const inputs = form.querySelectorAll("input"); // Grab all input fields
+function isEmailWithAtSymbol(email) {
+  return email.includes("@") && !email.startsWith("@") && !email.endsWith("@");
+}
+
+
+// Handle form submit
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const inputs = form.querySelectorAll("input");
+  const name = inputs[0].value.trim();
   const phone = inputs[1].value.trim();
 
-  // Phone validation rules
-  const isValid =
-    phone.startsWith("05") &&
-    /^\d+$/.test(phone) &&
-    phone.length === 10;
+  const email = inputs[4].value.trim();
 
-  if (!isValid) {
-    alert("Invalid phone number!\n\nMake sure it:\n1. Starts with '05'\n2. Contains only digits\n3. Is exactly 10 digits long");
-    return; // Stop form submission
+  if (email && !isEmailWithAtSymbol(email)) {
+  alert("Email syntax is not correct. It must contain '@' symbol.\n the '@' may be in the wrong place \n make sure it's not in the start or at the end ");
+  return;
+}
+  //function that required to enterd the name 
+  if (name === "") {
+    alert("Name is required.");
+    return;
   }
 
-  // Check for duplicate  phone number
-  const isDuplicate = contacts.some((c) => {
-    if (editingIndex !== null) return false; // Skip if editing the same contact
+  //function that check if the number is vailed or not 
+  const isValid = phone.startsWith("05") && /^\d+$/.test(phone) && phone.length === 10;
+  if (!isValid) {
+    alert("Invalid phone number!\n\nMake sure it:\n1. Starts with '05'\n2. Contains only digits\n3. Is exactly 10 digits long");
+    return;
+  }
+
+
+
+  //function that check if the contact is duplicate or not
+  const isDuplicate = contacts.some((c, i) => {
+    if (editingIndex !== null && i === editingIndex) return false;
     return c.phone === phone;
   });
-
+// if the contact is duplicate send alert
   if (isDuplicate) {
     alert("A contact with the same phone number already exists.");
     return;
   }
-  // Create new contact object from input values
+
+  //object for the values of the new contact
+  const textarea = form.querySelector("textarea");
   const newContact = {
-    name: inputs[0].value,
-    phone: inputs[1].value,
+    name: name,
+    phone: phone,
     address: inputs[2].value,
     age: inputs[3].value,
     email: inputs[4].value || 'N/A',
-    src: inputs[5].value || "img/d3b1c094-7d0d-4665-997c-83206e76f1a3.png"
+    src: inputs[5].value || "img/d3b1c094-7d0d-4665-997c-83206e76f1a3.png",
+    note: textarea.value
   };
-
-  // Update existing contact or add a new one
+// update contact or add the contact
   if (editingIndex !== null) {
     contacts[editingIndex] = newContact;
   } else {
     contacts.push(newContact);
   }
-
-  // Always sort alphabetically after adding/editing
+// sorting according a,b,c
   contacts.sort((a, b) => a.name.localeCompare(b.name));
-
-  editModal.classList.add("hidden"); // Close modal
-  renderContacts(contacts); // Refresh contact list
-  editModal.classList.add("hidden"); // Close modal
-  renderContacts(contacts); // Refresh contact list
+  editModal.classList.add("hidden");
+  renderContacts(contacts);
 });
 
-// Initial render of contacts when the page loads
+// show favorites only 
+favoritesBtn.addEventListener("click", () => {
+  const favorites = contacts.filter(c => c.favorite);
+  if (favorites.length === 0) {
+    alert("There are no favorite contacts.");
+  } else {
+    renderContacts(favorites);
+    favoritesBtn.style.display = "none";
+    showAllBtn.style.display = "inline-block";
+  }
+});
+// return to the defult
+showAllBtn.addEventListener("click", () => {
+  renderContacts(contacts);
+  showAllBtn.style.display = "none";
+  favoritesBtn.style.display = "inline-block";
+});
+
+
+// Initial render
 renderContacts(contacts);
-
-// Close the info modal (× button)
-closeInfoModal.addEventListener("click", () => {
-  infoModal.classList.add("hidden");
-});

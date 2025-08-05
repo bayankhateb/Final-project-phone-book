@@ -72,11 +72,19 @@ h1 {
   transform: scale(1.2); /* Slight zoom on hover */
 }
 
+.contact:hover {
+  background-color: #f0f0f0; /* Light gray background on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transform: scale(1.02); /* Slight zoom effect */
+  transition: all 0.2s ease; /* Smooth transition */
+}
+
 .contact {
   display: flex; /* Arrange contact details and buttons in a row */
   align-items: center; /* Center vertically */
   justify-content: space-between; /* Space between left and right */
-  border-bottom: 1px solid #eee; /* Light bottom border */
+  border-bottom: 5px solid #eee; /* Light bottom border */
+  overflow: hidden;
   padding: 10px 0; /* Vertical padding */
 }
 
@@ -100,6 +108,20 @@ h1 {
   margin-left: 8px; /* Space between buttons */
   font-size: 16px; /* Button size */
 }
+
+.contact span small {
+  color: #666;
+  font-size: 0.85rem;
+  
+}
+
+
+.contact.favorite{
+  background-color:#7d999e;
+  border-radius: 8px;
+  color:white
+}
+
 
 footer {
   width: 100%; /* Full width */
@@ -151,6 +173,14 @@ form {
 label {
   font-weight: bold; /* Make labels stand out */
 }
+
+textarea {
+  resize: vertical;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 
 input[type="text"] {
   padding: 8px; /* Inner spacing */

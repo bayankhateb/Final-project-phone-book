@@ -6,6 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="https://icons.iconarchive.com/icons/custom-icon-design/pretty-office-13/512/Phonebook-icon.png" type="image/x-icon">
+  <script>
+      nagishli_config = {  
+        color: "blue",
+        language: "en"
+      };
+    </script>
   <title>Phone Book</title>
 </head>
 
@@ -24,6 +30,8 @@
         </div>
         <div class="icons"> <!-- Icons for actions -->
           <button title="Add User">👤</button> <!-- Button to open the "Add Contact" modal -->
+          <button title="Show Favorites" id="showFavoritesBtn">⭐</button><!--Button to show list of the  favorite contact-->
+          <button title="Show All" id="showAllBtn" style="display: none;">📄</button><!-- Button to return the full list contacts-->
           <button title="Delete All">🗑️</button> <!-- Button to delete all contacts -->
         </div>
       </div>
@@ -68,6 +76,10 @@
             <input type="text" /> <!-- Optional email field -->
           </div>
           <div class="form-group">
+            <label>Note:</label>
+            <textarea type="text"></textarea>  <!-- Optional note filed -->
+          </div>
+          <div class="form-group">
             <label>Image URL:</label>
             <input type="text" /> <!-- Optional image URL -->
           </div>
@@ -95,7 +107,7 @@
   </footer>
 
   <script src="scripts.js"></script>
-
+<script src="js/nagishli_beta.js"></script>
 </body>
 
 </html>
